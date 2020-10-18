@@ -1,0 +1,10 @@
+export const CONNECT = 'connect';
+export const JOIN = 'join';
+export const CALL = 'call';
+export const EXIT = 'exit';
+export const OFFER = 'offer';
+export const ANSWER = 'answer';
+export const CANDIDATE = 'candidate';
+export const ROOM_NOT_FOUND = 'room_not_found';
+export const LEAVE = 'leave';
+export const SPEECH = 'speech';
