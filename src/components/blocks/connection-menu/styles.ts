@@ -6,11 +6,14 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    position: 'absolute',
+    height: 60,
     backgroundColor: theme.palette.primary.main,
-    width: '80%',
-    bottom: 10
+    overflow: 'hidden'
   },
-  button: {
+  createRoom: {
+    color: theme.palette.secondary.main
+  },
+  exitRoom: {
+    color: theme.palette.error.main
   }
 }));

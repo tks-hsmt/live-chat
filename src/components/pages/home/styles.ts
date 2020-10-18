@@ -36,6 +36,7 @@ export const useStyles = makeStyles(theme => ({
     height: '100% !important',
   },
   connectionMenu: {
+    marginTop: 5
   },
   commentBox: {
     '&:not(:last-child)': {

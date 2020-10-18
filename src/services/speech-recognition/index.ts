@@ -1,12 +1,13 @@
 class WebSpeechRecognition {
 
-  private rec: SpeechRecognition;
+  private rec: null | SpeechRecognition = null;
 
   private handleSpeech = (message: string) => { };
 
   private endSpeech = () => { };
 
-  constructor() {
+  init = (handleSpeech: (message: string) => void, endSpeech: () => void) => {
+    if (!(process as any).browser) { return; }
     const IWindow: any = window;
     const BrowserSpeechRecognition =
       typeof IWindow !== 'undefined'
@@ -16,15 +17,13 @@ class WebSpeechRecognition {
         || IWindow.msSpeechRecognition
         || IWindow.oSpeechRecognition)
     this.rec = new BrowserSpeechRecognition();
-  }
-
-  init = (handleSpeech: (message: string) => void, endSpeech: () => void) => {
     this.handleSpeech = handleSpeech;
     this.endSpeech = endSpeech;
   }
 
   start = () => {
     if (!this.rec) { return; }
+    console.log('Speech Recognition start');
     this.rec.lang = 'ja';
     this.rec.addEventListener('result', this.resultListener);
     this.rec.addEventListener('end', this.endListener);
@@ -33,6 +32,7 @@ class WebSpeechRecognition {
 
   stop = () => {
     if (!this.rec) { return; }
+    console.log('Speech Recognition stop');
     this.rec.stop();
     this.rec.removeEventListener('result', this.resultListener);
     this.rec.removeEventListener('end', this.endListener);
@@ -41,11 +41,14 @@ class WebSpeechRecognition {
 
   private resultListener = ({ results }: SpeechRecognitionEvent) => {
     const message = results?.[0]?.[0].transcript;
+    console.log(`message is ${message}`);
     if (!message) { return; }
     this.handleSpeech(message);
   };
 
   private endListener = () => {
+    if (!this.rec) { return; }
+    console.log('Speech Recognition end');
     this.rec.start();
   };
 }

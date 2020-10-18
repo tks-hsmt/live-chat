@@ -44,8 +44,8 @@ const Home: React.FC = () => {
         <Paper className={classes.paper}>
           <Video srcObject={stream} width={videoWidth} muted></ Video>
           {isConnected && streams?.map(stream => <Video key={stream.clientId} srcObject={stream.stream} width={videoWidth}></ Video>)}
-          <ConnectionMenu className={classes.connectionMenu} roomId={inputRoomId} nickName={nickName} exitAction={() => setInputRoomId('')} />
         </Paper>
+        <ConnectionMenu className={classes.connectionMenu} roomId={inputRoomId} nickName={nickName} exitAction={() => setInputRoomId('')} />
       </Box>
       {isConnected &&
         <Paper className={classes.speechArea}>

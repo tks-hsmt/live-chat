@@ -9,11 +9,10 @@
     "copy-to-clipboard": "^3.3.1",
     "express": "^4.17.1",
     "luxon": "^1.25.0",
+    "next": "^9.5.5",
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
-    "react-redux": "^7.2.1",
-    "react-scripts": "3.4.3",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",
     "socket.io-redis": "^5.4.0",
@@ -22,12 +21,10 @@
     "uuid": "^8.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server:start": "ts-node-dev --respawn server/index.ts",
-    "tn": "ts-node -P server/tsconfig.json server/index.ts"
+    "dev": "ts-node --project tsconfig.server.json server/index.ts",
+    "build:next": "next build",
+    "build:server": "tsc --project tsconfig.server.json",
+    "start": "NODE_ENV=production node dist/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,9 +49,7 @@
     "@types/jest": "^26.0.14",
     "@types/luxon": "^1.25.0",
     "@types/node": "^14.11.8",
-    "@types/react": "^16.9.52",
     "@types/react-copy-to-clipboard": "^4.3.0",
-    "@types/react-dom": "^16.9.8",
     "@types/socket.io": "^2.1.11",
     "@types/socket.io-client": "^1.4.34",
     "@types/socket.io-redis": "^1.0.26",
