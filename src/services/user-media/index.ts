@@ -1,6 +1,8 @@
+import { isSSR } from "../../utils";
+
 class UserMediaService {
   getStream = async (constraints: MediaStreamConstraints): Promise<null | Error | MediaStream> => {
-    if (!(process as any).browser) { return null; }
+    if (isSSR()) { return null; }
     try {
       return await navigator.mediaDevices.getUserMedia(constraints);
     } catch (e) {

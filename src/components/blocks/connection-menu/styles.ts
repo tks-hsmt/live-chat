@@ -11,9 +11,9 @@ export const useStyles = makeStyles(theme => ({
     overflow: 'hidden'
   },
   createRoom: {
-    color: theme.palette.secondary.main
+    color: `${theme.palette.secondary.main} !important`
   },
   exitRoom: {
-    color: theme.palette.error.main
+    color: `${theme.palette.error.main} !important`
   }
 }));

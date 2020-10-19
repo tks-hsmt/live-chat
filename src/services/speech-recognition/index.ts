@@ -1,3 +1,5 @@
+import { isSSR } from "../../utils";
+
 class WebSpeechRecognition {
 
   private rec: null | SpeechRecognition = null;
@@ -6,8 +8,9 @@ class WebSpeechRecognition {
 
   private endSpeech = () => { };
 
-  init = (handleSpeech: (message: string) => void, endSpeech: () => void) => {
-    if (!(process as any).browser) { return; }
+  constructor() {
+    // SSR起動時には何もしない
+    if (isSSR()) { return; }
     const IWindow: any = window;
     const BrowserSpeechRecognition =
       typeof IWindow !== 'undefined'
@@ -17,6 +20,9 @@ class WebSpeechRecognition {
         || IWindow.msSpeechRecognition
         || IWindow.oSpeechRecognition)
     this.rec = new BrowserSpeechRecognition();
+  }
+
+  init = (handleSpeech: (message: string) => void, endSpeech: () => void) => {
     this.handleSpeech = handleSpeech;
     this.endSpeech = endSpeech;
   }
