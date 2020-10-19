@@ -9,8 +9,6 @@ import { DateTime } from 'luxon';
  */
 class SocketService {
 
-  /** ドメイン */
-  private domain: string;
   /** ソケット */
   private socket: null | SocketIOClient.Socket;
   /** ユーザーメディアストリーム */
@@ -22,7 +20,6 @@ class SocketService {
   private setValue: React.Dispatch<React.SetStateAction<Connection>> = () => { };
 
   constructor() {
-    this.domain = process.env.DOMAIN || 'http://localhost:3000';
     this.socket = null;
     this.stream = null;
     this.peerConnections = [];
@@ -44,7 +41,7 @@ class SocketService {
    */
   connect = (stream: MediaStream, name: string, roomId?: RoomId): void => {
     this.stream = stream;
-    this.socket = io(this.domain, { transports: ['websocket', 'polling'] });
+    this.socket = io(process.env.DOMAIN as string, { transports: ['websocket', 'polling'] });
     const type = !roomId ? types.JOIN : types.CALL;
     // connectイベント監視
     this.socket.on(types.CONNECT, () => {
