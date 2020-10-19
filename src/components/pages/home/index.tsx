@@ -18,11 +18,10 @@ const Home: React.FC = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    if (streams.length !== 0) {
-      const width = document.getElementsByClassName(classes.paper)?.item(0)?.clientWidth || 1280;
-      console.log(width);
-      setVideoWidth((width / 2) - 40);
-    }
+    const paperWidth = document.getElementsByClassName(classes.paper)?.item(0)?.clientWidth as number - 40;
+    const videoWidth = (streams.length !== 0) ? (paperWidth / 2) : paperWidth;
+    console.log(videoWidth);
+    setVideoWidth(videoWidth);
   }, [streams.length, classes.paper]);
 
   return (

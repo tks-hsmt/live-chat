@@ -123,8 +123,9 @@ export const connectSocket = (server: Server): void => {
      * SPEECH
      */
     socket.on(types.SPEECH, ({ roomId, name, message }) => {
-      console.log(`====> [speech]`, {
+      console.log(`====> [speech]:`, {
         roomId: id,
+        name: name,
         clientId: socket.id,
         message: message
       });
@@ -134,7 +135,7 @@ export const connectSocket = (server: Server): void => {
         fromId: socket.id,
         message: message
       };
-      socket.broadcast.to(roomId).emit(types.CALL, data);
+      socket.broadcast.to(roomId).emit(types.SPEECH, data);
     });
 
     /**
