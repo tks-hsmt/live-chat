@@ -11,21 +11,21 @@ type SocketType = typeof types[keyof typeof types];
 export const connectSocket = (server: Server): void => {
 
   // 環境変数取得
-  const { NODE_ENV, REDIS_URL } = process.env;
+  // const { NODE_ENV, REDIS_URL } = process.env;
 
   // ソケットIO取得
   const io = socketIO();
 
-  if (NODE_ENV === 'production') {
-    if (!REDIS_URL) {
-      throw new Error('REDIS_URL is not defined.')
-    }
-    try {
-      io.adapter(redisAdapter(REDIS_URL))
-    } catch (e) {
-      throw new Error(e)
-    }
-  }
+  // if (NODE_ENV === 'production') {
+  //   if (!REDIS_URL) {
+  //     throw new Error('REDIS_URL is not defined.')
+  //   }
+  //   try {
+  //     io.adapter(redisAdapter(REDIS_URL))
+  //   } catch (e) {
+  //     throw new Error(e)
+  //   }
+  // }
 
   // アタッチ
   io.attach(server, { transports: ['websocket'] });
