@@ -9,6 +9,8 @@ import { DateTime } from 'luxon';
  */
 class SocketService {
 
+  /** ドメイン */
+  private domain: string;
   /** ソケット */
   private socket: null | SocketIOClient.Socket;
   /** ユーザーメディアストリーム */
@@ -19,7 +21,8 @@ class SocketService {
   /** 設定メソッド */
   private setValue: React.Dispatch<React.SetStateAction<Connection>> = () => { };
 
-  constructor(private domain: string) {
+  constructor() {
+    this.domain = process.env.DOMAIN || 'http://localhost:3000';
     this.socket = null;
     this.stream = null;
     this.peerConnections = [];
@@ -255,4 +258,4 @@ class SocketService {
   }
 }
 
-export const socketService = new SocketService(process.env.DOMAIN || 'http://localhost:8080' as string);
+export const socketService = new SocketService();
